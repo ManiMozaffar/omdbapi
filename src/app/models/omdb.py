@@ -4,11 +4,12 @@ from app.schemas.extras import OMDBResponse
 
 
 class OMDBApiModel(HTTPXBaseCrawler):
+    """OMDB Cralwer, using HTTPX Core"""
     async def execute(
         self,
         params: dict,
         page_num: int,
-    ):
+    ) -> OMDBResponse:
         params = await self.authorize(params)
         params.update(page=page_num)
         if not 0 <= page_num <= 100:
@@ -21,6 +22,6 @@ class OMDBApiModel(HTTPXBaseCrawler):
             return OMDBResponse(totalResults=0, Search=[])
         return OMDBResponse(**response.json())
 
-    async def authorize(self, params: dict):
+    async def authorize(self, params: dict) -> dict:
         params["apikey"] = config.OMDB_APIKEY
         return params

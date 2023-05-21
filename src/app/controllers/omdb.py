@@ -7,6 +7,7 @@ from app.repositories.omdb import OMDBRepository
 
 
 class OMDBController(graphene.ObjectType):
+    """Controller for OMDB GraphQL API Interface"""
 
     movies = graphene.relay.ConnectionField(
         MovieConnection,
@@ -35,7 +36,7 @@ class OMDBController(graphene.ObjectType):
 
     async def resolve_movies(
         root,
-        info,
+        info: graphene.ResolveInfo,
         Title: str,
         Year: Optional[str] = None,
         Type: Optional[str] = None,

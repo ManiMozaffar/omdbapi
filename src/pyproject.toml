@@ -15,6 +15,7 @@ pytest = "^7.3.1"
 faker = "^18.9.0"
 uvicorn = "^0.22.0"
 python-dotenv = "^1.0.0"
+pytest-asyncio = "^0.21.0"
 
 
 [build-system]
