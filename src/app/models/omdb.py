@@ -1,6 +1,6 @@
 from core.crawler import HTTPXBaseCrawler, NotValidPageNumber
 from core.config import config
-from schemas.extras import OMDBResponse
+from app.schemas.extras import OMDBResponse
 
 
 class OMDBApiModel(HTTPXBaseCrawler):
