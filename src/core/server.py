@@ -30,9 +30,9 @@ def make_middleware() -> List[Middleware]:
 
 def create_app() -> FastAPI:
     app_ = FastAPI(
-        title="FastAPI Boilerplate",
-        description="FastAPI Boilerplate by @iam-abbas",
-        version="1.0.0",
+        title="FastAPI RestAPI to GraphQL",
+        description="FastAPI RestAPI to GraphQL by @manimozaffar",
+        version="1.0.1",
         docs_url=None if config.ENVIRONMENT == "production" else "/docs",
         redoc_url=None if config.ENVIRONMENT == "production" else "/redoc",
         dependencies=[Depends(Logging)],

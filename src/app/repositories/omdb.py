@@ -1,7 +1,6 @@
 from typing import List
 import asyncio
 import math
-import logging
 
 from app.models import OMDBApiModel, OMDBResponse
 from core.utils.decorators import capacity_controller
@@ -29,7 +28,9 @@ class OMDBRepository:
         return responses
 
     @capacity_controller(threshold=100)
-    def get_max_size(self, desired_size, total_size, per_page):
+    def get_max_size(
+        self, desired_size: int, total_size: int, per_page: int
+    ) -> int:
         result = math.ceil(total_size/per_page)
         if desired_size:
             desired_result = math.ceil(desired_size/per_page)

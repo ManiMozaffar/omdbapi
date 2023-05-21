@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import graphene
 
@@ -19,14 +19,15 @@ class OMDBController(graphene.ObjectType):
     )
 
     @staticmethod
-    def exclude_none(_dict: dict):
+    def exclude_none(_dict: dict) -> dict:
         return {
             key: value for key, value in _dict.items()
             if value is not None
         }
 
     @staticmethod
-    def create_query(query: dict):
+    def create_query(query: dict) -> dict:
+        """Resolves query parameters for API"""
         query = {
             "s": query.get("Title"),
             "type": query.get("Type"),
@@ -43,7 +44,7 @@ class OMDBController(graphene.ObjectType):
         Skip: Optional[str] = None,
         Limit: Optional[str] = None,
         **_
-    ):
+    ) -> List[dict]:
         if Limit is None:
             Limit = 20
         if Skip is None:
