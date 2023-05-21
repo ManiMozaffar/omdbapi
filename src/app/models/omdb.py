@@ -10,6 +10,7 @@ class OMDBApiModel(HTTPXBaseCrawler):
         page_num: int,
     ):
         params = await self.authorize(params)
+        params.update(page=page_num)
         if not 0 <= page_num <= 100:
             raise NotValidPageNumber("Page number must be between 0 and 100")
         response = await self.core.get(
