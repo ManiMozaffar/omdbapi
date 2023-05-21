@@ -8,14 +8,13 @@ from app.repositories.omdb import OMDBRepository
 
 class OMDBController(graphene.ObjectType):
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.repository = OMDBRepository()
-
     movies = graphene.relay.ConnectionField(
         MovieConnection,
         Title=graphene.NonNull(graphene.String),
-        Type=graphene.String()
+        Type=graphene.String(),
+        Year=graphene.String(),
+        Skip=graphene.Int(),
+        Limit=graphene.Int()
     )
 
     @staticmethod
@@ -40,16 +39,26 @@ class OMDBController(graphene.ObjectType):
         Title: str,
         Year: Optional[str] = None,
         Type: Optional[str] = None,
-        **kwargs
+        Skip: Optional[str] = None,
+        Limit: Optional[str] = None,
+        **_
     ):
-        query = root.create_query(
+        if Limit is None:
+            Limit = 20
+        if Skip is None:
+            Skip = 0
+
+        query = OMDBController.create_query(
             {
                 "Type": Type,
                 "Title": Title,
                 "Year": Year
             }
         )
-        result = await root.repository.all(
+        result = await OMDBRepository().all(
             query=query,
+            limit=Limit,
+            skip=Skip
         )
-        return result
+        info.context.update(total_counts=result.get("totalResults"))
+        return result.get("Search")

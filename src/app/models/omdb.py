@@ -17,7 +17,9 @@ class OMDBApiModel(HTTPXBaseCrawler):
             url="http://www.omdbapi.com",
             params=params
         )
-        return OMDBResponse(response.json())
+        if response.json()["Response"] == 'False':
+            return OMDBResponse(totalResults=0, Search=[])
+        return OMDBResponse(**response.json())
 
     async def authorize(self, params: dict):
         params["apikey"] = config.OMDB_APIKEY

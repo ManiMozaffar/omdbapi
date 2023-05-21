@@ -19,4 +19,4 @@ class MovieConnection(graphene.relay.Connection):
     total_count = graphene.Int()
 
     def resolve_total_count(root, info: graphene.ResolveInfo):
-        return info.context.get("total_results")
+        return info.context.get("total_counts")

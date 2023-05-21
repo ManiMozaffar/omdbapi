@@ -1,5 +1,5 @@
 import pydantic
-from typing import List, Union
+from typing import List, Union, Optional
 
 
 class SearchResult(pydantic.BaseModel):
@@ -12,4 +12,5 @@ class SearchResult(pydantic.BaseModel):
 
 class OMDBResponse(pydantic.BaseModel):
     Search: List[SearchResult]
-    totalResults: str
+    totalResults: int
+    Response: Optional[bool]
