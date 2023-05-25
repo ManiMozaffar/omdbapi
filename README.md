@@ -1,5 +1,5 @@
-# Seedtrace's Coding Challenge
-This repository contains a coding challenge introduced by Seedtrace's company. The objective of this project is to create a GraphQL API using OMDB's API, following best practices and adhering to the SOLID MVC design pattern.
+# Coding Challenge
+This repository contains a coding challenge introduced. The objective of this project is to create a GraphQL API using OMDB's API, following best practices and adhering to the SOLID MVC design pattern.
 
 
 ## Table of content
